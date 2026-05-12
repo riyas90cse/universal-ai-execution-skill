@@ -14,7 +14,7 @@ The first version will contain:
 - A workflow registry
 - 46 workflows for common agent execution scenarios
 
-The actual skill, workflow registry, workflows, adapters, examples, tests, and implementation logic will be added in future issues.
+The current repository includes the initial skill router at `skills/universal-ai-execution/SKILL.md`. The full workflow registry, workflows, adapters, examples, tests, and implementation logic will be added in future issues.
 
 ## Core Principle
 
