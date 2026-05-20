@@ -1,0 +1,1391 @@
+version: 1
+registry_name: Universal AI Execution Workflow Registry
+workflow_count: 46
+default_workflow_sequence:
+  - Steelman
+  - Inventory
+  - Assumption Audit
+  - Gap Analysis
+  - Devil’s Advocate
+  - Red Team
+  - Scope Cut
+  - PR Breakdown
+  - Implementation Plan
+  - Execute
+  - Validate
+workflows:
+  - id: product-startup-idea
+    name: Product Startup Idea
+    category: Product
+    when_to_use: Use when assessing a new product or startup idea before committing time, capital, or build effort.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Grill
+      - Red Team
+      - Validation Plan
+      - Action Plan
+    focus_areas:
+      - Customer pain and urgency
+      - Market and competitive assumptions
+      - Validation before build scope
+    required_outputs:
+      - Strengthened idea summary
+      - Riskiest assumptions list
+      - Validation and action plan
+    validation_rules:
+      - Identify the target customer and problem clearly.
+      - Separate evidence from assumptions.
+      - End with testable next steps.
+    common_mistakes:
+      - Treating enthusiasm as validation
+      - Skipping customer evidence
+      - Defining an oversized first build
+
+  - id: mvp-planning
+    name: MVP Planning
+    category: Product
+    when_to_use: Use when narrowing an idea into the smallest useful product version that can test the core risk.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Scope Cut
+      - Red Team
+      - Action Plan
+    focus_areas:
+      - Core user outcome
+      - Scope boundaries
+      - Learning milestones
+    required_outputs:
+      - MVP goal and non-goals
+      - Prioritized feature set
+      - Execution and validation plan
+    validation_rules:
+      - Tie each feature to a validated user outcome or risk.
+      - Exclude nice-to-have scope explicitly.
+      - Define measurable learning criteria.
+    common_mistakes:
+      - Building a full product instead of an MVP
+      - Keeping features without a learning purpose
+      - Ignoring launch and feedback logistics
+
+  - id: vision-roadmap
+    name: Vision Roadmap
+    category: Product
+    when_to_use: Use when turning product direction into a sequenced roadmap with clear strategic tradeoffs.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Second-Order Thinking
+      - Red Team
+      - Roadmap
+    focus_areas:
+      - Strategic product bets
+      - Sequencing and dependencies
+      - Long-term consequences
+    required_outputs:
+      - Product vision summary
+      - Roadmap phases
+      - Risks and tradeoffs
+    validation_rules:
+      - Connect roadmap items to product strategy.
+      - Call out dependencies and second-order effects.
+      - Preserve clear phase boundaries.
+    common_mistakes:
+      - Listing features without strategy
+      - Ignoring sequencing constraints
+      - Hiding tradeoffs behind vague timelines
+
+  - id: idea-brainstorming
+    name: Idea Brainstorming
+    category: Product
+    when_to_use: Use when generating, challenging, and ranking ideas before choosing what to pursue.
+    workflow_sequence:
+      - Steelman
+      - Divergent Ideas
+      - Assumption Audit
+      - Devil’s Advocate
+      - Rank
+      - Action Plan
+    focus_areas:
+      - Idea variety
+      - Assumption quality
+      - Ranking criteria
+    required_outputs:
+      - Idea list
+      - Ranking rationale
+      - Next-step action plan
+    validation_rules:
+      - Produce multiple meaningfully different options.
+      - Rank against explicit criteria.
+      - Include at least one concrete next action.
+    common_mistakes:
+      - Converging too early
+      - Ranking by preference without criteria
+      - Ignoring constraints
+
+  - id: technical-architecture
+    name: Technical Architecture
+    category: Engineering
+    when_to_use: Use when selecting or reviewing a system architecture, major technical design, or platform direction.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Principal Engineer Grill
+      - Red Team
+      - Architecture Decision
+    focus_areas:
+      - System boundaries
+      - Technical tradeoffs
+      - Operational risks
+    required_outputs:
+      - Architecture recommendation
+      - Key tradeoffs and rejected options
+      - Decision record
+    validation_rules:
+      - Ground the decision in current constraints.
+      - Identify operational and failure-mode risks.
+      - Explain why alternatives were rejected.
+    common_mistakes:
+      - Choosing fashionable architecture without need
+      - Underestimating migration cost
+      - Ignoring runtime operations
+
+  - id: coding-implementation
+    name: Coding Implementation
+    category: Engineering
+    when_to_use: Use when making scoped code changes after understanding the repository and issue requirements.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Red Team
+      - Implementation Plan
+      - Code
+      - Validate
+    focus_areas:
+      - Repository inventory
+      - Minimal implementation
+      - Verification before completion
+    required_outputs:
+      - Implementation summary
+      - Files changed
+      - Validation result
+    validation_rules:
+      - Read the relevant code before editing.
+      - Keep the change inside the current issue scope.
+      - Run the most relevant available validation.
+    common_mistakes:
+      - Editing before inventory
+      - Adding unrelated features
+      - Claiming completion without validation
+
+  - id: documentation-cleanup
+    name: Documentation Cleanup
+    category: Documentation
+    when_to_use: Use when correcting, simplifying, or reconciling documentation without changing product behavior.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Red Team
+      - Inventory
+      - Cleanup Plan
+      - Execute
+    focus_areas:
+      - Documentation inventory
+      - Accuracy against current behavior
+      - Minimal content changes
+    required_outputs:
+      - Documentation inventory notes
+      - Cleanup plan
+      - Updated documentation
+    validation_rules:
+      - Confirm docs against source files or code behavior.
+      - Remove contradictions.
+      - Keep wording concise and scoped.
+    common_mistakes:
+      - Rewriting tone without fixing accuracy
+      - Introducing future behavior as current behavior
+      - Duplicating source-of-truth content
+
+  - id: cross-functional-team-simulation
+    name: Cross-Functional Team Simulation
+    category: Product
+    when_to_use: Use when a decision needs critique from product, engineering, design, security, support, or business perspectives.
+    workflow_sequence:
+      - Steelman
+      - Assumption Audit
+      - Devil’s Advocate
+      - Grill by Function
+      - Red Team
+      - Decision
+      - Action Plan
+    focus_areas:
+      - Functional perspectives
+      - Decision tradeoffs
+      - Cross-team risks
+    required_outputs:
+      - Function-by-function critique
+      - Decision recommendation
+      - Action plan
+    validation_rules:
+      - Include only relevant functions for the decision.
+      - Separate stakeholder concerns from final recommendation.
+      - Resolve or explicitly accept material conflicts.
+    common_mistakes:
+      - Treating every function as equally relevant
+      - Producing opinions without a decision
+      - Ignoring implementation ownership
+
+  - id: testing-strategy
+    name: Testing Strategy
+    category: Testing
+    when_to_use: Use when designing or evaluating the testing approach for a product, feature, repository, or release.
+    workflow_sequence:
+      - Steelman
+      - Test Inventory
+      - Risk Audit
+      - Devil’s Advocate
+      - Test Pyramid Design
+      - Coverage Gap Analysis
+      - Action Plan
+    focus_areas:
+      - Risk-based coverage
+      - Test pyramid balance
+      - Gaps and priorities
+    required_outputs:
+      - Current test inventory
+      - Target testing strategy
+      - Coverage gap action plan
+    validation_rules:
+      - Tie test types to concrete product risks.
+      - Identify missing critical paths.
+      - Avoid broad coverage claims without evidence.
+    common_mistakes:
+      - Over-indexing on one test type
+      - Ignoring high-risk user flows
+      - Measuring coverage without quality
+
+  - id: test-automation-repo-design
+    name: Test Automation Repo Design
+    category: Testing
+    when_to_use: Use when designing a repository or framework structure for automated tests.
+    workflow_sequence:
+      - Steelman
+      - Current Test Audit
+      - Boundary Definition
+      - Devil’s Advocate
+      - Framework Selection
+      - Execution Strategy
+      - Repository Design
+      - Action Plan
+    focus_areas:
+      - Test ownership boundaries
+      - Framework fit
+      - Execution reliability
+    required_outputs:
+      - Automation boundary definition
+      - Framework recommendation
+      - Repository structure plan
+    validation_rules:
+      - Define what belongs in the automation repo.
+      - Justify framework choice against needs.
+      - Include execution and maintenance strategy.
+    common_mistakes:
+      - Designing folders before defining boundaries
+      - Choosing tools by familiarity only
+      - Ignoring flaky test controls
+
+  - id: security-codebase-audit
+    name: Security Codebase Audit
+    category: Security
+    when_to_use: Use when reviewing a codebase for security risks, abuse paths, and remediation priorities.
+    workflow_sequence:
+      - Steelman
+      - Asset Inventory
+      - Threat Model
+      - Assumption Audit
+      - Devil’s Advocate
+      - Red Team
+      - Vulnerability Report
+      - Remediation Plan
+      - Verification Plan
+    focus_areas:
+      - Assets and trust boundaries
+      - Threat scenarios
+      - Verified vulnerabilities
+    required_outputs:
+      - Threat model summary
+      - Vulnerability report
+      - Remediation and verification plan
+    validation_rules:
+      - Trace findings to code or architecture evidence.
+      - Distinguish confirmed issues from hypotheses.
+      - Include verification steps for fixes.
+    common_mistakes:
+      - Reporting generic best practices as findings
+      - Skipping source-to-sink analysis
+      - Omitting exploitability and impact
+
+  - id: compliance-audit
+    name: Compliance Audit
+    category: Compliance
+    when_to_use: Use when mapping product, data, or operational behavior against regulatory or policy obligations.
+    workflow_sequence:
+      - Steelman
+      - Regulation Mapping
+      - Data Inventory
+      - Control Audit
+      - Evidence Gap Analysis
+      - Devil’s Advocate
+      - Red Team
+      - Remediation Roadmap
+    focus_areas:
+      - Applicable obligations
+      - Data and control coverage
+      - Evidence gaps
+    required_outputs:
+      - Regulation mapping
+      - Evidence gap report
+      - Remediation roadmap
+    validation_rules:
+      - Name the applicable regulation or policy scope.
+      - Map controls to evidence.
+      - Separate legal uncertainty from implementation gaps.
+    common_mistakes:
+      - Treating compliance as a checklist only
+      - Missing data processing paths
+      - Claiming compliance without evidence
+
+  - id: refactoring
+    name: Refactoring
+    category: Engineering
+    when_to_use: Use when improving code structure while preserving behavior and limiting migration risk.
+    workflow_sequence:
+      - Steelman
+      - Code Inventory
+      - Pain Point Map
+      - Assumption Audit
+      - Devil’s Advocate
+      - Refactor Boundary
+      - Migration Plan
+      - Small PR Execution Plan
+      - Validation
+    focus_areas:
+      - Current behavior preservation
+      - Refactor boundaries
+      - Incremental migration
+    required_outputs:
+      - Refactor scope
+      - Migration plan
+      - Validation approach
+    validation_rules:
+      - Identify behavior that must not change.
+      - Keep boundaries small and explicit.
+      - Require validation before and after refactor.
+    common_mistakes:
+      - Mixing refactor and feature work
+      - Expanding scope after discovering adjacent issues
+      - Removing behavior without tests or evidence
+
+  - id: legacy-migration
+    name: Legacy Migration
+    category: Engineering
+    when_to_use: Use when moving from an old system, framework, or architecture to a new target while preserving continuity.
+    workflow_sequence:
+      - Steelman
+      - Legacy Inventory
+      - Current System Map
+      - Target Architecture
+      - Gap Analysis
+      - Devil’s Advocate
+      - Migration Strategy
+      - Compatibility Plan
+      - Phased Execution
+      - Cutover Plan
+    focus_areas:
+      - Legacy behavior inventory
+      - Compatibility and cutover
+      - Phased execution risk
+    required_outputs:
+      - Current and target system map
+      - Migration strategy
+      - Cutover plan
+    validation_rules:
+      - Map legacy behavior before replacement.
+      - Define compatibility requirements.
+      - Plan rollback or contingency at cutover.
+    common_mistakes:
+      - Underestimating edge-case behavior
+      - Replacing too much in one step
+      - Missing operational cutover details
+
+  - id: framework-version-upgrade
+    name: Framework Version Upgrade
+    category: Engineering
+    when_to_use: Use when upgrading a framework, runtime, library, or platform version with possible breaking changes.
+    workflow_sequence:
+      - Steelman
+      - Dependency Inventory
+      - Breaking Change Audit
+      - Risk Classification
+      - Devil’s Advocate
+      - Upgrade Strategy
+      - Compatibility Fix Plan
+      - Test Plan
+      - Rollout Plan
+    focus_areas:
+      - Dependency and version inventory
+      - Breaking change analysis
+      - Test and rollout safety
+    required_outputs:
+      - Dependency inventory
+      - Upgrade and compatibility plan
+      - Test and rollout plan
+    validation_rules:
+      - Identify relevant breaking changes before editing.
+      - Classify high-risk areas.
+      - Validate with targeted tests or checks.
+    common_mistakes:
+      - Blindly bumping versions
+      - Ignoring indirect dependencies
+      - Skipping rollback considerations
+
+  - id: database-design-review
+    name: Database Design Review
+    category: Data
+    when_to_use: Use when reviewing schema, persistence boundaries, migrations, or data access design.
+    workflow_sequence:
+      - Steelman
+      - Domain Model Audit
+      - Data Flow Analysis
+      - Assumption Audit
+      - Devil’s Advocate
+      - Scalability Review
+      - Security Review
+      - Migration Plan
+      - Decision
+    focus_areas:
+      - Domain model fit
+      - Data integrity and access
+      - Migration safety
+    required_outputs:
+      - Data model assessment
+      - Scalability and security notes
+      - Migration decision
+    validation_rules:
+      - Tie schema choices to domain behavior.
+      - Review read and write paths.
+      - Include migration and rollback considerations.
+    common_mistakes:
+      - Optimizing schema before understanding access patterns
+      - Ignoring data migration risks
+      - Missing authorization impact
+
+  - id: api-design-review
+    name: API Design Review
+    category: Engineering
+    when_to_use: Use when evaluating API endpoints, contracts, versioning, security, and consumer fit.
+    workflow_sequence:
+      - Steelman
+      - Endpoint Inventory
+      - Consumer Mapping
+      - Contract Audit
+      - Devil’s Advocate
+      - Security Review
+      - Versioning Review
+      - API Decision
+    focus_areas:
+      - Endpoint and consumer needs
+      - Contract consistency
+      - Security and versioning
+    required_outputs:
+      - Endpoint inventory
+      - API contract findings
+      - API decision
+    validation_rules:
+      - Identify concrete API consumers.
+      - Verify request and response contracts.
+      - Consider authentication, authorization, and versioning.
+    common_mistakes:
+      - Designing endpoints without consumer workflows
+      - Ignoring backward compatibility
+      - Treating security as separate from the contract
+
+  - id: backend-ui-integration-audit
+    name: Backend UI Integration Audit
+    category: Engineering
+    when_to_use: Use when checking whether backend APIs, UI screens, and data contracts line up correctly.
+    workflow_sequence:
+      - Steelman
+      - Backend Endpoint Inventory
+      - UI Screen Inventory
+      - Contract Mapping
+      - Gap Analysis
+      - Devil’s Advocate
+      - Integration Plan
+      - PR-by-PR Execution Plan
+      - Validation
+    focus_areas:
+      - Endpoint-to-screen mapping
+      - Contract gaps
+      - Incremental integration plan
+    required_outputs:
+      - Backend and UI inventories
+      - Contract gap report
+      - PR-by-PR integration plan
+    validation_rules:
+      - Map every relevant screen to data needs.
+      - Identify missing or mismatched contracts.
+      - Sequence fixes into reviewable PRs.
+    common_mistakes:
+      - Auditing backend and UI separately
+      - Missing error and loading states
+      - Combining unrelated integration fixes
+
+  - id: full-codebase-audit
+    name: Full Codebase Audit
+    category: Engineering
+    when_to_use: Use when performing a broad repository audit across functionality, architecture, quality, and operations.
+    workflow_sequence:
+      - Steelman
+      - Repository Inventory
+      - Business Capability Map
+      - Functional Audit
+      - Non-Functional Audit
+      - Devil’s Advocate
+      - Red Team
+      - Gap Report
+      - Execution Roadmap
+    focus_areas:
+      - Repository structure and ownership
+      - Business capability coverage
+      - Functional and non-functional gaps
+    required_outputs:
+      - Repository inventory
+      - Gap report
+      - Execution roadmap
+    validation_rules:
+      - Inventory before judging quality.
+      - Tie findings to code or repo evidence.
+      - Prioritize gaps by impact and effort.
+    common_mistakes:
+      - Producing generic audit checklists
+      - Skipping capability mapping
+      - Mixing audit output with immediate rewrites
+
+  - id: performance-scalability-review
+    name: Performance Scalability Review
+    category: Engineering
+    when_to_use: Use when assessing performance bottlenecks, traffic growth, capacity limits, or scalability decisions.
+    workflow_sequence:
+      - Steelman
+      - Traffic Model
+      - Hot Path Analysis
+      - Bottleneck Audit
+      - Devil’s Advocate
+      - Load Test Plan
+      - Optimization Plan
+      - Scalability Decision
+    focus_areas:
+      - Traffic assumptions
+      - Hot paths and bottlenecks
+      - Measurement-backed decisions
+    required_outputs:
+      - Traffic model
+      - Bottleneck findings
+      - Load test and optimization plan
+    validation_rules:
+      - State expected traffic and workload assumptions.
+      - Identify hot paths before proposing optimizations.
+      - Prefer measurement plans over guesses.
+    common_mistakes:
+      - Optimizing without a traffic model
+      - Ignoring database and external service limits
+      - Treating benchmark results as production truth
+
+  - id: observability-monitoring
+    name: Observability Monitoring
+    category: Operations
+    when_to_use: Use when designing or reviewing logs, metrics, traces, alerts, dashboards, and runbooks.
+    workflow_sequence:
+      - Steelman
+      - System Inventory
+      - Signal Audit
+      - Failure Mode Analysis
+      - Devil’s Advocate
+      - Dashboard Plan
+      - Alert Plan
+      - Runbook Plan
+    focus_areas:
+      - Critical system signals
+      - Failure detection
+      - Response readiness
+    required_outputs:
+      - Signal inventory
+      - Dashboard and alert plan
+      - Runbook plan
+    validation_rules:
+      - Tie signals to user or system impact.
+      - Avoid alerts without action paths.
+      - Include runbook ownership and escalation.
+    common_mistakes:
+      - Monitoring everything without priorities
+      - Creating noisy alerts
+      - Missing end-user impact signals
+
+  - id: cicd-pipeline-design
+    name: CI/CD Pipeline Design
+    category: Operations
+    when_to_use: Use when designing or reviewing build, test, deployment, quality gate, and rollback workflows.
+    workflow_sequence:
+      - Steelman
+      - Repo Workflow Audit
+      - Build Pipeline Inventory
+      - Risk Audit
+      - Devil’s Advocate
+      - Quality Gate Design
+      - Deployment Strategy
+      - Rollback Plan
+    focus_areas:
+      - Build and test pipeline flow
+      - Quality gates
+      - Deployment and rollback safety
+    required_outputs:
+      - Pipeline inventory
+      - Quality gate design
+      - Deployment and rollback plan
+    validation_rules:
+      - Match gates to actual release risks.
+      - Define failure behavior for each stage.
+      - Include rollback or recovery steps.
+    common_mistakes:
+      - Adding gates without ownership
+      - Ignoring flaky or slow pipeline impact
+      - Treating deployment as separate from validation
+
+  - id: infrastructure-review
+    name: Infrastructure Review
+    category: Operations
+    when_to_use: Use when evaluating infrastructure design, environments, cost, security, and scalability.
+    workflow_sequence:
+      - Steelman
+      - Infrastructure Inventory
+      - Environment Map
+      - Cost Audit
+      - Security Audit
+      - Devil’s Advocate
+      - Scalability Review
+      - Infra Decision
+    focus_areas:
+      - Infrastructure inventory
+      - Environment consistency
+      - Cost, security, and scale
+    required_outputs:
+      - Infrastructure and environment map
+      - Cost and security findings
+      - Infrastructure decision
+    validation_rules:
+      - Inventory resources before recommending changes.
+      - Include cost and security tradeoffs.
+      - Identify environment drift.
+    common_mistakes:
+      - Reviewing architecture without deployed resources
+      - Ignoring cost ownership
+      - Missing environment parity problems
+
+  - id: cloud-migration
+    name: Cloud Migration
+    category: Operations
+    when_to_use: Use when planning migration from current infrastructure to a target cloud environment.
+    workflow_sequence:
+      - Steelman
+      - Current Infra Inventory
+      - Target Cloud Architecture
+      - Migration Risk Audit
+      - Devil’s Advocate
+      - Cost Model
+      - Phased Migration Plan
+      - Cutover Plan
+    focus_areas:
+      - Current infrastructure reality
+      - Target cloud fit
+      - Migration risk and cutover
+    required_outputs:
+      - Current and target architecture summary
+      - Cost model
+      - Phased migration and cutover plan
+    validation_rules:
+      - Preserve critical workloads and data paths.
+      - Include cost and operational assumptions.
+      - Plan cutover with rollback or contingency.
+    common_mistakes:
+      - Migrating without workload inventory
+      - Underestimating data movement
+      - Skipping cloud operating model changes
+
+  - id: rbac-permission-design
+    name: RBAC Permission Design
+    category: Security
+    when_to_use: Use when designing roles, permissions, access control, and authorization data models.
+    workflow_sequence:
+      - Steelman
+      - Actor Inventory
+      - Capability Map
+      - Permission Model
+      - Assumption Audit
+      - Devil’s Advocate
+      - Abuse Case Review
+      - Data Model
+      - Migration Plan
+      - Validation
+    focus_areas:
+      - Actors and capabilities
+      - Abuse cases
+      - Authorization data model
+    required_outputs:
+      - Actor and capability map
+      - Permission model
+      - Migration and validation plan
+    validation_rules:
+      - Map permissions to concrete capabilities.
+      - Review abuse and privilege escalation cases.
+      - Include migration impact on existing users.
+    common_mistakes:
+      - Creating roles before mapping capabilities
+      - Ignoring deny and edge cases
+      - Missing tenant or data-scope boundaries
+
+  - id: multi-tenancy-design
+    name: Multi-Tenancy Design
+    category: Security
+    when_to_use: Use when designing tenant isolation, shared resources, access boundaries, and scaling behavior.
+    workflow_sequence:
+      - Steelman
+      - Tenant Model
+      - Data Isolation Audit
+      - Access Control Audit
+      - Devil’s Advocate
+      - Security Red Team
+      - Scaling Review
+      - Architecture Decision
+    focus_areas:
+      - Tenant isolation
+      - Access boundaries
+      - Scaling model
+    required_outputs:
+      - Tenant model
+      - Isolation and access review
+      - Architecture decision
+    validation_rules:
+      - Define tenant identity and isolation rules.
+      - Review cross-tenant data access risks.
+      - Account for scale and noisy neighbor effects.
+    common_mistakes:
+      - Treating tenant ID as sufficient isolation
+      - Ignoring shared infrastructure limits
+      - Missing tenant lifecycle operations
+
+  - id: product-analytics-design
+    name: Product Analytics Design
+    category: Data
+    when_to_use: Use when defining product metrics, events, dashboards, and instrumentation plans.
+    workflow_sequence:
+      - Steelman
+      - Business Question Inventory
+      - Event Taxonomy
+      - Data Quality Audit
+      - Devil’s Advocate
+      - Dashboard Plan
+      - Instrumentation Plan
+      - Validation Plan
+    focus_areas:
+      - Business questions
+      - Event taxonomy
+      - Data quality and validation
+    required_outputs:
+      - Business question inventory
+      - Event taxonomy
+      - Dashboard and instrumentation plan
+    validation_rules:
+      - Start from decisions the analytics should support.
+      - Define event names, properties, and ownership.
+      - Include data quality checks.
+    common_mistakes:
+      - Tracking events without business questions
+      - Overloading event properties
+      - Ignoring validation after instrumentation
+
+  - id: ai-feature-design
+    name: AI Feature Design
+    category: AI
+    when_to_use: Use when deciding whether and how to add an AI-powered feature to a product.
+    workflow_sequence:
+      - Steelman
+      - User Problem Audit
+      - AI Necessity Test
+      - Data Readiness Audit
+      - Devil’s Advocate
+      - Failure Mode Analysis
+      - Safety Review
+      - MVP Design
+      - Evaluation Plan
+    focus_areas:
+      - User problem fit
+      - Data readiness
+      - Safety and evaluation
+    required_outputs:
+      - AI necessity assessment
+      - MVP feature design
+      - Evaluation plan
+    validation_rules:
+      - Prove AI is needed for the user problem.
+      - Identify data and safety constraints.
+      - Define evaluation criteria before launch.
+    common_mistakes:
+      - Adding AI without product need
+      - Ignoring failure modes
+      - Launching without evaluation
+
+  - id: llm-integration
+    name: LLM Integration
+    category: AI
+    when_to_use: Use when integrating language models into workflows, tools, products, or agents.
+    workflow_sequence:
+      - Steelman
+      - Use Case Definition
+      - Prompt Contract
+      - Data Boundary Audit
+      - Devil’s Advocate
+      - Safety Red Team
+      - Cost/Latency Review
+      - Evaluation Plan
+    focus_areas:
+      - Use case and prompt contract
+      - Data boundaries
+      - Safety, cost, and latency
+    required_outputs:
+      - Use case definition
+      - Prompt and data boundary contract
+      - Evaluation plan
+    validation_rules:
+      - Define expected model inputs and outputs.
+      - Protect sensitive data boundaries.
+      - Include cost, latency, and quality evaluation.
+    common_mistakes:
+      - Treating prompts as informal notes
+      - Ignoring prompt injection and data exposure
+      - Skipping regression evaluation
+
+  - id: documentation-source-of-truth-cleanup
+    name: Documentation Source of Truth Cleanup
+    category: Documentation
+    when_to_use: Use when resolving conflicting docs and deciding which files are authoritative.
+    workflow_sequence:
+      - Steelman
+      - Documentation Inventory
+      - Code Reality Check
+      - Conflict Detection
+      - Devil’s Advocate
+      - Source-of-Truth Decision
+      - Cleanup Plan
+      - Execute
+    focus_areas:
+      - Documentation inventory
+      - Code reality checks
+      - Source-of-truth boundaries
+    required_outputs:
+      - Conflict inventory
+      - Source-of-truth decision
+      - Cleanup execution summary
+    validation_rules:
+      - Compare docs to current code or repository state.
+      - Remove or mark conflicting content.
+      - Avoid duplicating canonical content.
+    common_mistakes:
+      - Keeping multiple authoritative copies
+      - Updating docs without checking code
+      - Leaving stale references behind
+
+  - id: repo-restructuring
+    name: Repo Restructuring
+    category: Engineering
+    when_to_use: Use when changing repository layout, module boundaries, package structure, or ownership areas.
+    workflow_sequence:
+      - Steelman
+      - Current Repo Inventory
+      - Target Repo Model
+      - Dependency Mapping
+      - Devil’s Advocate
+      - Migration Plan
+      - PR Sequence
+      - Validation Plan
+    focus_areas:
+      - Current repository layout
+      - Dependency impacts
+      - Incremental migration
+    required_outputs:
+      - Current and target repo maps
+      - Dependency impact notes
+      - PR sequence and validation plan
+    validation_rules:
+      - Inventory files and dependencies before moving code.
+      - Keep migration steps reviewable.
+      - Define validation for imports, builds, and docs.
+    common_mistakes:
+      - Moving files before mapping dependencies
+      - Combining restructure with feature changes
+      - Ignoring downstream references
+
+  - id: feature-gap-analysis
+    name: Feature Gap Analysis
+    category: Product
+    when_to_use: Use when comparing intended feature behavior against current UI, backend, data, and user journeys.
+    workflow_sequence:
+      - Steelman
+      - Feature Inventory
+      - User Journey Mapping
+      - Backend Mapping
+      - UI Mapping
+      - Data Mapping
+      - Devil’s Advocate
+      - Gap Report
+      - Completion Plan
+    focus_areas:
+      - Intended feature behavior
+      - Cross-layer implementation gaps
+      - Completion sequencing
+    required_outputs:
+      - Feature inventory
+      - Gap report
+      - Completion plan
+    validation_rules:
+      - Map gaps across user journey, UI, backend, and data.
+      - Distinguish missing work from broken work.
+      - Prioritize gaps by user impact.
+    common_mistakes:
+      - Auditing only one layer
+      - Treating unclear requirements as completed
+      - Skipping data model gaps
+
+  - id: release-readiness
+    name: Release Readiness
+    category: Delivery
+    when_to_use: Use when deciding whether a product, feature, or version is ready to release.
+    workflow_sequence:
+      - Steelman
+      - Scope Freeze
+      - Quality Gate Audit
+      - Security Gate Audit
+      - DevOps Readiness
+      - Devil’s Advocate
+      - Go/No-Go Decision
+      - Release Plan
+    focus_areas:
+      - Scope and quality gates
+      - Security and operational readiness
+      - Release decision
+    required_outputs:
+      - Readiness checklist
+      - Go/no-go decision
+      - Release plan
+    validation_rules:
+      - Confirm scope is frozen or call out exceptions.
+      - Review quality, security, and operational gates.
+      - Include rollback or mitigation plan.
+    common_mistakes:
+      - Adding scope during readiness review
+      - Ignoring operational preparedness
+      - Making a release decision without criteria
+
+  - id: production-incident-analysis
+    name: Production Incident Analysis
+    category: Operations
+    when_to_use: Use when analyzing a production incident, outage, degradation, or near miss.
+    workflow_sequence:
+      - Timeline Reconstruction
+      - Impact Assessment
+      - Hypothesis List
+      - Evidence Audit
+      - Devil’s Advocate
+      - Root Cause Analysis
+      - Corrective Actions
+      - Prevention Plan
+    focus_areas:
+      - Timeline and impact
+      - Evidence-backed root cause
+      - Corrective and preventive actions
+    required_outputs:
+      - Incident timeline
+      - Root cause analysis
+      - Corrective action and prevention plan
+    validation_rules:
+      - Separate facts from hypotheses.
+      - Connect root cause to evidence.
+      - Assign actionable prevention steps.
+    common_mistakes:
+      - Jumping to root cause too early
+      - Blaming people instead of systems
+      - Leaving corrective actions unowned
+
+  - id: code-review
+    name: Code Review
+    category: Engineering
+    when_to_use: Use when reviewing a diff, pull request, patch, or proposed code change.
+    workflow_sequence:
+      - Intent Understanding
+      - Diff Audit
+      - Architecture Fit
+      - Security Review
+      - Test Review
+      - Devil’s Advocate
+      - Merge Decision
+    focus_areas:
+      - Change intent
+      - Behavioral and architectural risk
+      - Tests and merge readiness
+    required_outputs:
+      - Review findings
+      - Open questions
+      - Merge recommendation
+    validation_rules:
+      - Prioritize bugs and regressions over style.
+      - Reference concrete files or behavior.
+      - Call out missing tests for material risks.
+    common_mistakes:
+      - Reviewing style before correctness
+      - Missing the intended behavior change
+      - Approving without considering tests
+
+  - id: pull-request-planning
+    name: Pull Request Planning
+    category: Delivery
+    when_to_use: Use when breaking a larger change into small, ordered, reviewable pull requests.
+    workflow_sequence:
+      - Goal Definition
+      - Impact Map
+      - Dependency Map
+      - Scope Cut
+      - PR Breakdown
+      - Risk Review
+      - Execution Order
+    focus_areas:
+      - Goal and scope boundaries
+      - Dependencies
+      - PR sequencing
+    required_outputs:
+      - PR breakdown
+      - Dependency and risk notes
+      - Execution order
+    validation_rules:
+      - Keep each PR independently reviewable.
+      - Identify dependencies between PRs.
+      - Avoid combining unrelated concerns.
+    common_mistakes:
+      - Making one large PR for convenience
+      - Splitting by file instead of behavior
+      - Ignoring rollout order
+
+  - id: ui-ux-review
+    name: UI UX Review
+    category: Design
+    when_to_use: Use when reviewing user interface quality, usability, accessibility, and design consistency.
+    workflow_sequence:
+      - Steelman
+      - User Journey Audit
+      - Screen Inventory
+      - UX Heuristic Review
+      - Accessibility Audit
+      - Devil’s Advocate
+      - Design Consistency Review
+      - Improvement Plan
+    focus_areas:
+      - User journey and task fit
+      - Accessibility
+      - Design consistency
+    required_outputs:
+      - UI and journey findings
+      - Accessibility notes
+      - Improvement plan
+    validation_rules:
+      - Review actual user tasks and screens.
+      - Include accessibility and responsive behavior.
+      - Prioritize issues by user impact.
+    common_mistakes:
+      - Reviewing visuals without user flows
+      - Ignoring accessibility basics
+      - Suggesting redesigns outside scope
+
+  - id: design-system-cleanup
+    name: Design System Cleanup
+    category: Design
+    when_to_use: Use when consolidating components, tokens, patterns, or usage rules in a design system.
+    workflow_sequence:
+      - Steelman
+      - Component Inventory
+      - Token Audit
+      - Usage Mapping
+      - Devil’s Advocate
+      - Duplication Review
+      - Consolidation Plan
+      - Migration Plan
+    focus_areas:
+      - Component inventory
+      - Token and pattern consistency
+      - Migration safety
+    required_outputs:
+      - Component and token audit
+      - Duplication findings
+      - Consolidation and migration plan
+    validation_rules:
+      - Map current usage before consolidation.
+      - Preserve product behavior and accessibility.
+      - Sequence migration to avoid broad churn.
+    common_mistakes:
+      - Renaming components without usage analysis
+      - Cleaning tokens without migration plan
+      - Combining visual redesign with cleanup
+
+  - id: data-seeding-demo-data
+    name: Data Seeding Demo Data
+    category: Data
+    when_to_use: Use when designing seed data, demo scenarios, fixtures, or repeatable demo environments.
+    workflow_sequence:
+      - Steelman
+      - Demo Scenario Design
+      - Data Model Audit
+      - Seed Dependency Map
+      - Devil’s Advocate
+      - Migration Strategy
+      - Seed Script Plan
+      - Validation
+    focus_areas:
+      - Demo scenarios
+      - Data model dependencies
+      - Repeatability and validation
+    required_outputs:
+      - Demo scenario plan
+      - Seed dependency map
+      - Seed script and validation plan
+    validation_rules:
+      - Tie seeded data to realistic demo stories.
+      - Respect data model constraints and dependencies.
+      - Ensure seeds can be rerun safely.
+    common_mistakes:
+      - Creating random data without scenarios
+      - Violating model dependencies
+      - Making seeds non-repeatable
+
+  - id: marketplace-design
+    name: Marketplace Design
+    category: Business
+    when_to_use: Use when designing or evaluating a marketplace model, including supply, demand, trust, and liquidity.
+    workflow_sequence:
+      - Steelman
+      - Supply/Demand Audit
+      - Assumption Audit
+      - Devil’s Advocate
+      - Liquidity Risk Review
+      - Trust/Safety Review
+      - MVP Scope Cut
+      - Validation Plan
+    focus_areas:
+      - Supply and demand balance
+      - Liquidity risk
+      - Trust and safety
+    required_outputs:
+      - Marketplace model assessment
+      - MVP scope
+      - Validation plan
+    validation_rules:
+      - Identify which side of the market is harder.
+      - Address trust, safety, and quality controls.
+      - Define liquidity validation before scaling.
+    common_mistakes:
+      - Assuming both sides will arrive together
+      - Ignoring trust and safety mechanics
+      - Scaling before proving liquidity
+
+  - id: pricing-monetization
+    name: Pricing Monetization
+    category: Business
+    when_to_use: Use when designing pricing, packaging, monetization strategy, or willingness-to-pay validation.
+    workflow_sequence:
+      - Steelman
+      - Customer Segment Map
+      - Value Metric Audit
+      - Willingness-To-Pay Test
+      - Devil’s Advocate
+      - Competitor Benchmark
+      - Pricing Model
+      - Validation Plan
+    focus_areas:
+      - Customer segments
+      - Value metric
+      - Pricing validation
+    required_outputs:
+      - Segment and value metric analysis
+      - Pricing model
+      - Validation plan
+    validation_rules:
+      - Tie price to customer value and segment.
+      - Include willingness-to-pay evidence or test plan.
+      - Benchmark competitors without copying blindly.
+    common_mistakes:
+      - Pricing by cost alone
+      - Ignoring packaging complexity
+      - Treating competitor prices as proof
+
+  - id: gtm-strategy
+    name: GTM Strategy
+    category: Business
+    when_to_use: Use when developing go-to-market strategy, customer targeting, channels, messaging, or launch motion.
+    workflow_sequence:
+      - Steelman
+      - ICP Definition
+      - Pain Audit
+      - Channel Audit
+      - Devil’s Advocate
+      - Distribution Plan
+      - Messaging Plan
+      - Validation Plan
+    focus_areas:
+      - Ideal customer profile
+      - Channels and distribution
+      - Messaging validation
+    required_outputs:
+      - ICP and pain summary
+      - Distribution plan
+      - Messaging and validation plan
+    validation_rules:
+      - Define a specific ICP.
+      - Connect channels to customer behavior.
+      - Include validation loops for messaging.
+    common_mistakes:
+      - Targeting everyone
+      - Choosing channels by preference
+      - Writing messaging before pain is clear
+
+  - id: investor-pitch-review
+    name: Investor Pitch Review
+    category: Business
+    when_to_use: Use when reviewing or improving an investor pitch, fundraising narrative, or pitch deck story.
+    workflow_sequence:
+      - Steelman
+      - Market Audit
+      - Problem Urgency Audit
+      - Differentiation Review
+      - Devil’s Advocate
+      - Investor Grill
+      - Red Team
+      - Pitch Rewrite Plan
+    focus_areas:
+      - Market and urgency
+      - Differentiation
+      - Investor objections
+    required_outputs:
+      - Pitch critique
+      - Investor objection list
+      - Rewrite plan
+    validation_rules:
+      - Make the problem urgency explicit.
+      - Explain why the company can win.
+      - Address likely investor objections.
+    common_mistakes:
+      - Leading with solution before market pain
+      - Hiding weak differentiation
+      - Ignoring business model questions
+
+  - id: hiring-org-design
+    name: Hiring Org Design
+    category: People
+    when_to_use: Use when planning roles, hiring priorities, team structure, or organizational evolution.
+    workflow_sequence:
+      - Steelman
+      - Business Needs Audit
+      - Role Inventory
+      - Skill Gap Analysis
+      - Devil’s Advocate
+      - Hiring Priority Stack Rank
+      - 90-Day Plan
+      - Org Evolution
+    focus_areas:
+      - Business needs
+      - Role and skill gaps
+      - Hiring sequence
+    required_outputs:
+      - Role and gap analysis
+      - Hiring priority stack rank
+      - 90-day and org evolution plan
+    validation_rules:
+      - Tie roles to business needs.
+      - Prioritize based on constraints and impact.
+      - Include first-90-day outcomes.
+    common_mistakes:
+      - Hiring for titles instead of outcomes
+      - Ignoring current team capabilities
+      - Planning org shape without budget constraints
+
+  - id: interview-preparation
+    name: Interview Preparation
+    category: Career
+    when_to_use: Use when preparing for a job interview, role screen, technical interview, or hiring conversation.
+    workflow_sequence:
+      - Role Analysis
+      - Company Research
+      - Profile Mapping
+      - Weakness Audit
+      - Devil’s Advocate
+      - Mock Interview
+      - Answer Refinement
+      - Practice Plan
+    focus_areas:
+      - Role requirements
+      - Candidate story fit
+      - Practice and improvement
+    required_outputs:
+      - Role and company notes
+      - Answer refinement plan
+      - Practice plan
+    validation_rules:
+      - Map candidate evidence to role requirements.
+      - Identify weak areas honestly.
+      - Practice answers against likely interview prompts.
+    common_mistakes:
+      - Preparing generic answers
+      - Ignoring role-specific expectations
+      - Skipping mock practice
+
+  - id: career-positioning
+    name: Career Positioning
+    category: Career
+    when_to_use: Use when clarifying career direction, market positioning, resume narrative, or professional brand.
+    workflow_sequence:
+      - Profile Inventory
+      - Market Mapping
+      - Strength Audit
+      - Weakness Audit
+      - Devil’s Advocate
+      - Positioning Decision
+      - Resume/LinkedIn Plan
+    focus_areas:
+      - Profile and strengths
+      - Market fit
+      - Positioning narrative
+    required_outputs:
+      - Profile inventory
+      - Positioning decision
+      - Resume and LinkedIn plan
+    validation_rules:
+      - Tie positioning to market demand.
+      - Support claims with evidence.
+      - Identify gaps that need development or reframing.
+    common_mistakes:
+      - Trying to appeal to every role
+      - Making unsupported positioning claims
+      - Ignoring visible proof of skills

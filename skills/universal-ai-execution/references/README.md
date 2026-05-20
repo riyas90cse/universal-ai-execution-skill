@@ -1,10 +1,14 @@
 # References
 
-This directory will hold reference material for the Universal AI Execution Skill.
+This directory holds reference material for the Universal AI Execution Skill.
+
+Current files include:
+
+- `workflow-registry.yaml`
+- `technique-registry.md`
 
 Planned files include:
 
-- `technique-registry.md`
 - `output-contracts.md`
 
-The full workflow registry and output contracts are intentionally not included in this issue.
+`workflow-registry.yaml` is the source of truth. `technique-registry.md` is generated from it.

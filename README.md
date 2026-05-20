@@ -6,15 +6,28 @@ It exists to help AI agents handle software work with a consistent execution dis
 
 The project is intended for AI coding agents, agent platform builders, maintainers, and developers who want agent behavior to be safer, more predictable, and easier to review across repositories.
 
-## Planned Scope
+## Registry v1
 
-The first version will contain:
+The first version includes:
 
 - A portable Agent Skill
-- A workflow registry
+- A YAML workflow registry
 - 46 workflows for common agent execution scenarios
+- Generated readable registry documentation
 
-The current repository includes the initial skill router at `skills/universal-ai-execution/SKILL.md`. The full workflow registry, workflows, adapters, examples, tests, and implementation logic will be added in future issues.
+`skills/universal-ai-execution/references/workflow-registry.yaml` is the source of truth for workflow selection.
+`skills/universal-ai-execution/references/technique-registry.md` is generated readable documentation.
+`skills/universal-ai-execution/SKILL.md` remains only the router.
+
+Regenerate the readable registry with:
+
+```sh
+uv run scripts/generate-technique-registry.py
+```
+
+Python script dependencies are declared with `uv` inline script metadata.
+
+Adapters, examples, tests, and implementation logic will be added in future issues.
 
 ## Core Principle
 

@@ -13,7 +13,7 @@ This `SKILL.md` is only the router. It does not contain the full workflow regist
 
 1. Understand the task.
 2. Classify the task.
-3. Select the workflow from `references/technique-registry.md`.
+3. Select the workflow from `references/workflow-registry.yaml`.
 4. Apply the output contract from `references/output-contracts.md`.
 5. Enforce validation before completion.
 
@@ -41,5 +41,6 @@ This `SKILL.md` is only the router. It does not contain the full workflow regist
 ## Separation of Concerns
 
 - Router: this file selects the mode, workflow, contract, and validation path.
-- Registry: `references/technique-registry.md` will define detailed workflows.
+- Registry: `references/workflow-registry.yaml` defines detailed workflows.
+- Readable registry: `references/technique-registry.md` is generated from the YAML registry.
 - Contracts: `references/output-contracts.md` will define expected outputs.
