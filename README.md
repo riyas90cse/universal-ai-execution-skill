@@ -15,11 +15,13 @@ The first version includes:
 - 46 workflows for common agent execution scenarios
 - Deterministic task classification rules
 - Structured output contracts
+- Guardrail references for validation, PR breakdown, security, docs, product/business review, and anti-patterns
 - Generated readable registry documentation
 
 `skills/universal-ai-execution/references/workflow-registry.yaml` is the source of truth for workflow selection.
 `skills/universal-ai-execution/references/task-classification-rules.md` defines deterministic routing logic.
 `skills/universal-ai-execution/references/output-contracts.md` defines structured output formats.
+`skills/universal-ai-execution/references/validation-matrix.md` and related guardrail references define safety checks for execution discipline.
 `skills/universal-ai-execution/references/technique-registry.md` is generated readable documentation.
 `skills/universal-ai-execution/SKILL.md` remains only the router.
 
