@@ -13,9 +13,13 @@ The first version includes:
 - A portable Agent Skill
 - A YAML workflow registry
 - 46 workflows for common agent execution scenarios
+- Deterministic task classification rules
+- Structured output contracts
 - Generated readable registry documentation
 
 `skills/universal-ai-execution/references/workflow-registry.yaml` is the source of truth for workflow selection.
+`skills/universal-ai-execution/references/task-classification-rules.md` defines deterministic routing logic.
+`skills/universal-ai-execution/references/output-contracts.md` defines structured output formats.
 `skills/universal-ai-execution/references/technique-registry.md` is generated readable documentation.
 `skills/universal-ai-execution/SKILL.md` remains only the router.
 
