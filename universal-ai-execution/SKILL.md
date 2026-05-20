@@ -38,6 +38,15 @@ This `SKILL.md` is only the router. It does not contain the full workflow regist
 - Database work requires migration and rollback thinking.
 - UI/backend work requires contract mapping.
 
+## Guardrail References
+
+- Validation: `references/validation-matrix.md`
+- PR breakdown: `references/pr-breakdown-rules.md`
+- Anti-patterns: `references/anti-patterns.md`
+- Security review: `references/security-review-rules.md`
+- Documentation review: `references/documentation-review-rules.md`
+- Product and business review: `references/product-business-review-rules.md`
+
 ## Separation of Concerns
 
 - Router: this file selects the mode, workflow, contract, and validation path.
