@@ -6,6 +6,27 @@ It exists to help AI agents handle software work with a consistent execution dis
 
 The project is intended for AI coding agents, agent platform builders, maintainers, and developers who want agent behavior to be safer, more predictable, and easier to review across repositories.
 
+## Adapters
+
+Adapters translate the Universal AI Execution Skill into instruction formats for
+different AI environments. They do not replace `skills/universal-ai-execution/SKILL.md`
+or duplicate the workflow registry.
+
+- Codex: copy or merge `adapters/codex/AGENTS.md` into a repository `AGENTS.md`
+  file so Codex is directed to the canonical skill router and registry.
+- Generic LLM: paste `adapters/generic-llm/universal-invocation-prompt.md` into
+  an LLM session and fill in `[TASK]`, `[REPO_CONTEXT]`, `[CONSTRAINTS]`, and
+  `[EXPECTED_OUTPUT]`. Include relevant skill files in context when the LLM
+  cannot read the repository.
+- Cursor: place `adapters/cursor/universal-ai-execution.mdc` in a Cursor rules
+  location, such as `.cursor/rules/`, when that environment supports `.mdc`
+  rules.
+- GitHub Copilot: use `adapters/github-copilot/copilot-instructions.md` as
+  repository or chat instruction text where Copilot custom instructions are
+  supported.
+- Symphony-style workflow: use `adapters/symphony/WORKFLOW.md` as issue-driven
+  orchestration guidance. It is not a runtime implementation.
+
 ## Registry v1
 
 The first version includes:
@@ -16,6 +37,7 @@ The first version includes:
 - Deterministic task classification rules
 - Structured output contracts
 - Guardrail references for validation, PR breakdown, security, docs, product/business review, and anti-patterns
+- Lightweight adapters for Codex, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration
 - Generated readable registry documentation
 
 `skills/universal-ai-execution/references/workflow-registry.yaml` is the source of truth for workflow selection.
@@ -33,7 +55,7 @@ uv run scripts/generate-technique-registry.py
 
 Python script dependencies are declared with `uv` inline script metadata.
 
-Adapters, examples, tests, and implementation logic will be added in future issues.
+Examples, tests, and implementation logic will be added in future issues.
 
 ## Core Principle
 

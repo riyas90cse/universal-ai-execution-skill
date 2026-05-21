@@ -1,0 +1,39 @@
+---
+description: Use the Universal AI Execution Skill to classify tasks, select workflows, and validate scoped changes.
+alwaysApply: false
+---
+
+# Universal AI Execution
+
+When this rule is active, use the canonical skill at:
+
+`skills/universal-ai-execution/SKILL.md`
+
+Treat `SKILL.md` as the router. Do not duplicate workflow definitions in this
+rule.
+
+Use these canonical references:
+
+- Workflow registry: `skills/universal-ai-execution/references/workflow-registry.yaml`
+- Task classification: `skills/universal-ai-execution/references/task-classification-rules.md`
+- Output contracts: `skills/universal-ai-execution/references/output-contracts.md`
+- Validation guardrails: `skills/universal-ai-execution/references/validation-matrix.md`
+- PR breakdown rules: `skills/universal-ai-execution/references/pr-breakdown-rules.md`
+- Anti-pattern rules: `skills/universal-ai-execution/references/anti-patterns.md`
+
+## Cursor Instructions
+
+1. Classify the task before selecting an approach.
+2. Select the workflow from the canonical registry.
+3. Inventory relevant files before implementation.
+4. Plan the smallest reviewable change.
+5. Preserve existing architecture and conventions.
+6. Avoid giant rewrites and unrelated cleanup.
+7. Apply the matching output contract.
+8. Validate before claiming completion.
+
+If the task is ambiguous, ask a focused clarification or state the smallest safe
+assumption before proceeding.
+
+This adapter translates usage format only. It does not provide native Cursor
+support beyond what Cursor rule files normally support.
