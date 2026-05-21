@@ -27,6 +27,22 @@ or duplicate the workflow registry.
 - Symphony-style workflow: use `adapters/symphony/WORKFLOW.md` as issue-driven
   orchestration guidance. It is not a runtime implementation.
 
+## Examples
+
+Examples show realistic workflow selection, expected output structure, and good
+versus bad prompting behavior.
+
+- [Codebase audit](examples/codebase-audit-example.md)
+- [Backend/UI integration audit](examples/backend-ui-integration-example.md)
+- [Security audit](examples/security-audit-example.md)
+- [MVP planning](examples/mvp-planning-example.md)
+- [Refactor plan](examples/refactor-plan-example.md)
+- [Documentation cleanup](examples/documentation-cleanup-example.md)
+- [RBAC design](examples/rbac-design-example.md)
+- [Testing strategy](examples/test-strategy-example.md)
+- [GTM strategy](examples/gtm-strategy-example.md)
+- [Career positioning](examples/career-positioning-example.md)
+
 ## Registry v1
 
 The first version includes:
@@ -38,6 +54,7 @@ The first version includes:
 - Structured output contracts
 - Guardrail references for validation, PR breakdown, security, docs, product/business review, and anti-patterns
 - Lightweight adapters for Codex, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration
+- Practical examples for common workflow selections
 - Generated readable registry documentation
 
 `skills/universal-ai-execution/references/workflow-registry.yaml` is the source of truth for workflow selection.
@@ -55,7 +72,7 @@ uv run scripts/generate-technique-registry.py
 
 Python script dependencies are declared with `uv` inline script metadata.
 
-Examples, tests, and implementation logic will be added in future issues.
+Tests and implementation logic will be added in future issues.
 
 ## Core Principle
 
