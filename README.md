@@ -72,7 +72,24 @@ uv run scripts/generate-technique-registry.py
 
 Python script dependencies are declared with `uv` inline script metadata.
 
-Tests and implementation logic will be added in future issues.
+## Local Validation
+
+Install lightweight development requirements, then run the structure tests and
+standalone validation script:
+
+```sh
+python -m pip install -r requirements-dev.txt
+python -m pytest
+python scripts/validate-skill-structure.py
+```
+
+Use `python3` instead of `python` if your environment does not provide a
+`python` command.
+
+The tests validate package structure, router/registry separation, required
+reference files, adapter files, and all 46 workflow IDs in both registry outputs.
+
+Implementation logic will be added in future issues.
 
 ## Core Principle
 
