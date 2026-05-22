@@ -19,6 +19,7 @@ This roadmap is directional. Issue scope remains the source of truth for actual 
 ## v0.3.0: Adapters and Examples
 
 - Codex adapter.
+- Claude Code project instruction adapter.
 - Generic LLM invocation prompt.
 - Cursor rule format.
 - GitHub Copilot instruction format.

@@ -36,7 +36,7 @@ Supporting references define task classification, output contracts, validation r
 - `skills/universal-ai-execution/references/workflow-registry.yaml`: source of truth for workflows.
 - `skills/universal-ai-execution/references/technique-registry.md`: generated readable registry.
 - `skills/universal-ai-execution/references/*.md`: classification, contracts, and guardrail references.
-- `adapters/`: usage instructions for Codex, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration.
+- `adapters/`: usage instructions for Codex, Claude Code, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration.
 - `examples/`: practical workflow selection examples with good and bad prompts.
 - `tests/`: structure and registry integrity tests.
 - `scripts/`: registry generation and structure validation scripts.
@@ -45,6 +45,12 @@ Supporting references define task classification, output contracts, validation r
 ## Use With Codex
 
 Copy or merge `adapters/codex/AGENTS.md` into a repository `AGENTS.md` file. The adapter directs Codex to read `skills/universal-ai-execution/SKILL.md`, select workflows from Workflow Registry v1, apply output contracts, and validate before claiming completion.
+
+## Use With Claude Code
+
+Copy or merge `adapters/claude-code/CLAUDE.md` into a repository `CLAUDE.md` file. The adapter directs Claude Code to read `skills/universal-ai-execution/SKILL.md`, select workflows from Workflow Registry v1, apply output contracts, and validate before claiming completion.
+
+This is project-instruction guidance for Claude Code. It does not provide a runtime integration or guarantee access beyond the files and tools available in the current Claude Code session.
 
 ## Use With Generic LLMs
 

@@ -39,6 +39,7 @@ REQUIRED_PATHS = (
     "skills/universal-ai-execution/references/documentation-review-rules.md",
     "skills/universal-ai-execution/references/product-business-review-rules.md",
     "adapters/codex/AGENTS.md",
+    "adapters/claude-code/CLAUDE.md",
     "adapters/cursor/universal-ai-execution.mdc",
     "adapters/github-copilot/copilot-instructions.md",
     "adapters/generic-llm/universal-invocation-prompt.md",

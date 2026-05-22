@@ -22,6 +22,7 @@ REQUIRED_REFERENCE_FILES = (
 
 REQUIRED_ADAPTER_FILES = (
     "adapters/codex/AGENTS.md",
+    "adapters/claude-code/CLAUDE.md",
     "adapters/cursor/universal-ai-execution.mdc",
     "adapters/github-copilot/copilot-instructions.md",
     "adapters/generic-llm/universal-invocation-prompt.md",

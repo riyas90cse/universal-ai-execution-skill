@@ -21,7 +21,7 @@ Use `python3` instead of `python` if the local environment does not provide a `p
 ## Documentation Review
 
 - [ ] README explains what the project is, why it exists, who should use it, and how it works.
-- [ ] README includes usage notes for Codex, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration.
+- [ ] README includes usage notes for Codex, Claude Code, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration.
 - [ ] README links to examples, roadmap, contribution guide, security policy, changelog, and license.
 - [ ] Design principles are current.
 - [ ] Roadmap is current.
