@@ -14,8 +14,20 @@ This `SKILL.md` is only the router. It does not contain the full workflow regist
 1. Understand the task.
 2. Classify the task using `references/task-classification-rules.md`.
 3. Select the workflow from `references/workflow-registry.yaml`.
-4. Apply the output contract from `references/output-contracts.md`.
-5. Enforce validation before completion.
+4. Check whether the selected workflow has an optional focused skill mapping.
+5. Apply the output contract from `references/output-contracts.md`.
+6. Enforce validation before completion.
+
+## Focused Skill Accelerators
+
+Focused skills are optional deeper playbooks for selected workflows. The router must still work when no focused skill exists or when a focused skill is unavailable.
+
+Use focused skills this way:
+
+1. Route through this skill first.
+2. Treat the registry workflow and output contract as authoritative.
+3. Load a mapped focused skill only as an accelerator for execution detail.
+4. Do not use focused skills to rename workflow IDs, add registry content, or bypass validation.
 
 ## Execution Modes
 
@@ -52,5 +64,6 @@ This `SKILL.md` is only the router. It does not contain the full workflow regist
 - Router: this file selects the mode, workflow, contract, and validation path.
 - Classification rules: `references/task-classification-rules.md` defines deterministic routing logic.
 - Registry: `references/workflow-registry.yaml` defines detailed workflows.
+- Focused skill mappings: `references/workflow-registry.yaml` maps selected workflows to optional focused skill paths.
 - Readable registry: `references/technique-registry.md` is generated from the YAML registry.
 - Contracts: `references/output-contracts.md` defines expected output structures.
