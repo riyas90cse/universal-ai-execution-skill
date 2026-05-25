@@ -27,6 +27,7 @@ EXPECTED_WORKFLOW_COUNT = 46
 REQUIRED_PATHS = (
     "AGENTS.md",
     "WORKFLOW.md",
+    "docs/focused-skills.md",
     "skills/universal-ai-execution/SKILL.md",
     "skills/universal-ai-execution/references/workflow-registry.yaml",
     "skills/universal-ai-execution/references/technique-registry.md",
@@ -44,6 +45,27 @@ REQUIRED_PATHS = (
     "adapters/github-copilot/copilot-instructions.md",
     "adapters/generic-llm/universal-invocation-prompt.md",
     "adapters/symphony/WORKFLOW.md",
+)
+
+REQUIRED_FOCUSED_SKILL_PATHS = (
+    "skills/setup-universal-ai-execution/SKILL.md",
+    "skills/productivity/write-a-skill/SKILL.md",
+    "skills/productivity/grill-me/SKILL.md",
+    "skills/engineering/review-changes/SKILL.md",
+    "skills/engineering/full-codebase-audit/SKILL.md",
+    "skills/engineering/refactor-plan/SKILL.md",
+    "skills/security/security-audit/SKILL.md",
+)
+
+REQUIRED_FOCUSED_SKILL_SECTIONS = (
+    "## Purpose",
+    "## Mapped Workflows",
+    "## When To Use",
+    "## Required Inputs",
+    "## Process",
+    "## Output Contract",
+    "## Validation Checklist",
+    "## Common Mistakes",
 )
 
 ROUTER_FORBIDDEN_REGISTRY_MARKERS = (
@@ -74,6 +96,19 @@ def load_registry() -> dict[str, Any]:
     return registry
 
 
+def validate_skill_front_matter(content: str, path: str, errors: list[str]) -> None:
+    front_matter_end = content.find("\n---\n", 4)
+    if not content.startswith("---\n") or front_matter_end == -1:
+        errors.append(f"{path} must have YAML front matter.")
+        return
+
+    front_matter = content[4:front_matter_end]
+    if "name:" not in front_matter:
+        errors.append(f"{path} front matter must include name.")
+    if "description:" not in front_matter:
+        errors.append(f"{path} front matter must include description.")
+
+
 def validate() -> list[str]:
     errors: list[str] = []
 
@@ -89,15 +124,7 @@ def validate() -> list[str]:
         return errors
 
     skill_content = SKILL_PATH.read_text(encoding="utf-8")
-    front_matter_end = skill_content.find("\n---\n", 4)
-    if not skill_content.startswith("---\n") or front_matter_end == -1:
-        errors.append("SKILL.md must have YAML front matter.")
-    else:
-        front_matter = skill_content[4:front_matter_end]
-        if "name:" not in front_matter:
-            errors.append("SKILL.md front matter must include name.")
-        if "description:" not in front_matter:
-            errors.append("SKILL.md front matter must include description.")
+    validate_skill_front_matter(skill_content, "SKILL.md", errors)
 
     for marker in ROUTER_FORBIDDEN_REGISTRY_MARKERS:
         if marker in skill_content:
@@ -128,6 +155,53 @@ def validate() -> list[str]:
         missing = sorted(expected_ids - set(actual_ids))
         extra = sorted(set(actual_ids) - expected_ids)
         errors.append(f"workflow IDs must match fixture. Missing={missing}; extra={extra}")
+
+    focused_skill_mappings = registry.get("focused_skill_mappings")
+    if not isinstance(focused_skill_mappings, dict) or not focused_skill_mappings:
+        errors.append("workflow-registry.yaml must define non-empty focused_skill_mappings.")
+        focused_skill_mappings = {}
+
+    required_focused_paths = set(REQUIRED_FOCUSED_SKILL_PATHS)
+    mapped_focused_paths = set()
+    for workflow_id, focused_path in focused_skill_mappings.items():
+        if workflow_id not in set(actual_ids):
+            errors.append(f"focused_skill_mappings references unknown workflow ID: {workflow_id}")
+        if not isinstance(focused_path, str) or not focused_path.strip():
+            errors.append(f"focused_skill_mappings value for {workflow_id} must be a non-empty path.")
+            continue
+        mapped_focused_paths.add(focused_path)
+        if not (ROOT / focused_path).is_file():
+            errors.append(f"focused_skill_mappings path does not exist: {focused_path}")
+
+    missing_focused_paths = sorted(required_focused_paths - mapped_focused_paths)
+    if missing_focused_paths:
+        errors.append(f"Focused skills must map to at least one workflow ID: {missing_focused_paths}")
+
+    for focused_path in REQUIRED_FOCUSED_SKILL_PATHS:
+        full_path = ROOT / focused_path
+        if not full_path.is_file():
+            errors.append(f"Missing required focused skill: {focused_path}")
+            continue
+
+        focused_content = full_path.read_text(encoding="utf-8")
+        validate_skill_front_matter(focused_content, focused_path, errors)
+        for section in REQUIRED_FOCUSED_SKILL_SECTIONS:
+            if section not in focused_content:
+                errors.append(f"{focused_path} missing required section: {section}")
+        for marker in ROUTER_FORBIDDEN_REGISTRY_MARKERS:
+            if marker in focused_content:
+                errors.append(f"{focused_path} must not duplicate registry marker: {marker}")
+
+        mapped_workflow_ids = re.findall(r"^- `([^`]+)`$", focused_content, flags=re.MULTILINE)
+        if not mapped_workflow_ids:
+            errors.append(f"{focused_path} must map to at least one workflow ID.")
+        for mapped_workflow_id in mapped_workflow_ids:
+            if mapped_workflow_id not in set(actual_ids):
+                errors.append(f"{focused_path} references unknown workflow ID: {mapped_workflow_id}")
+            if focused_skill_mappings.get(mapped_workflow_id) != focused_path:
+                errors.append(
+                    f"{focused_path} mapped workflow {mapped_workflow_id} must match focused_skill_mappings."
+                )
 
     technique_content = TECHNIQUE_REGISTRY_PATH.read_text(encoding="utf-8")
     generated_ids = set(re.findall(r"^### `([^`]+)`$", technique_content, flags=re.MULTILINE))

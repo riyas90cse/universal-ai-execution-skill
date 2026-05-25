@@ -18,10 +18,13 @@ flowchart TD
     A[User Task] --> B[Skill Router]
     B --> C[Classify Task]
     C --> D[Select Workflow]
-    D --> E[Apply Output Contract]
-    E --> F[Plan Small]
-    F --> G[Execute or Review]
-    G --> H[Validate]
+    D --> E{Focused Skill Mapping?}
+    E -->|Optional| F[Load Focused Skill]
+    E -->|None| G[Apply Output Contract]
+    F --> G
+    G --> H[Plan Small]
+    H --> I[Execute or Review]
+    I --> J[Validate]
 ```
 
 The router lives in `skills/universal-ai-execution/SKILL.md`.
@@ -30,12 +33,20 @@ Workflow Registry v1 lives in `skills/universal-ai-execution/references/workflow
 
 Supporting references define task classification, output contracts, validation rules, PR breakdown discipline, security review constraints, documentation integrity, product/business review rules, and anti-patterns.
 
+Focused skills are optional accelerators for selected high-value workflows. The router still classifies every task and the registry remains the source of truth; focused skills add deeper execution playbooks only after routing is complete.
+
+See [Focused skills](docs/focused-skills.md) for the router versus focused skill model and the canonical workflow-to-skill mapping.
+
 ## Project Structure
 
 - `skills/universal-ai-execution/SKILL.md`: portable skill router.
 - `skills/universal-ai-execution/references/workflow-registry.yaml`: source of truth for workflows.
 - `skills/universal-ai-execution/references/technique-registry.md`: generated readable registry.
 - `skills/universal-ai-execution/references/*.md`: classification, contracts, and guardrail references.
+- `skills/setup-universal-ai-execution/SKILL.md`: setup-focused accelerator for wiring the universal skill into agent environments.
+- `skills/productivity/`, `skills/engineering/`, and `skills/security/`: focused skill playbooks mapped from selected workflow IDs.
+- `skills/universal-ai-execution/templates/`: reserved for future issue-driven templates that reference canonical files without duplicating them.
+- `skills/universal-ai-execution/scripts/`: reserved for future skill-local helpers, migration helpers, and consistency checks.
 - `adapters/`: usage instructions for Codex, Claude Code, generic LLMs, Cursor, GitHub Copilot, and Symphony-style orchestration.
 - `examples/`: practical workflow selection examples with good and bad prompts.
 - `tests/`: structure and registry integrity tests.
@@ -103,7 +114,9 @@ Regenerate the readable registry with:
 uv run scripts/generate-technique-registry.py
 ```
 
-The tests validate package structure, router/registry separation, required reference files, adapter files, and all 46 workflow IDs in both registry outputs.
+The tests validate package structure, router/registry separation, required reference files, focused skill mappings, adapter files, and all 46 workflow IDs in both registry outputs.
+
+Skill-local scripts may be added later for targeted migration or consistency checks, but repository-wide validation currently lives in `scripts/`.
 
 ## Roadmap
 

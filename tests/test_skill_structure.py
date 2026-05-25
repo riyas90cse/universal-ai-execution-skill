@@ -20,6 +20,27 @@ REQUIRED_REFERENCE_FILES = (
     "product-business-review-rules.md",
 )
 
+REQUIRED_FOCUSED_SKILL_FILES = (
+    "skills/setup-universal-ai-execution/SKILL.md",
+    "skills/productivity/write-a-skill/SKILL.md",
+    "skills/productivity/grill-me/SKILL.md",
+    "skills/engineering/review-changes/SKILL.md",
+    "skills/engineering/full-codebase-audit/SKILL.md",
+    "skills/engineering/refactor-plan/SKILL.md",
+    "skills/security/security-audit/SKILL.md",
+)
+
+REQUIRED_FOCUSED_SKILL_SECTIONS = (
+    "## Purpose",
+    "## Mapped Workflows",
+    "## When To Use",
+    "## Required Inputs",
+    "## Process",
+    "## Output Contract",
+    "## Validation Checklist",
+    "## Common Mistakes",
+)
+
 REQUIRED_ADAPTER_FILES = (
     "adapters/codex/AGENTS.md",
     "adapters/claude-code/CLAUDE.md",
@@ -70,6 +91,7 @@ def test_skill_has_yaml_front_matter_with_name_and_description() -> None:
 def test_required_root_files_exist() -> None:
     assert (ROOT / "AGENTS.md").is_file()
     assert (ROOT / "WORKFLOW.md").is_file()
+    assert (ROOT / "docs/focused-skills.md").is_file()
 
 
 def test_required_reference_files_exist() -> None:
@@ -82,6 +104,29 @@ def test_required_reference_files_exist() -> None:
 def test_required_adapter_files_exist() -> None:
     for path in REQUIRED_ADAPTER_FILES:
         assert (ROOT / path).is_file(), path
+
+
+def test_required_focused_skill_files_exist() -> None:
+    for path in REQUIRED_FOCUSED_SKILL_FILES:
+        assert (ROOT / path).is_file(), path
+
+
+def test_focused_skills_have_required_structure() -> None:
+    for path in REQUIRED_FOCUSED_SKILL_FILES:
+        content = (ROOT / path).read_text(encoding="utf-8")
+
+        assert content.startswith("---\n"), path
+        front_matter_end = content.find("\n---\n", 4)
+        assert front_matter_end != -1, path
+        front_matter = content[4:front_matter_end]
+        assert "name:" in front_matter, path
+        assert "description:" in front_matter, path
+
+        for section in REQUIRED_FOCUSED_SKILL_SECTIONS:
+            assert section in content, f"{path} missing {section}"
+
+        for marker in ROUTER_FORBIDDEN_REGISTRY_MARKERS:
+            assert marker not in content, f"{path} duplicates {marker}"
 
 
 def test_generic_invocation_prompt_exists() -> None:

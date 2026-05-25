@@ -13,6 +13,27 @@ default_workflow_sequence:
   - Implementation Plan
   - Execute
   - Validate
+focused_skill_mappings:
+  documentation-source-of-truth-cleanup: skills/setup-universal-ai-execution/SKILL.md
+  documentation-cleanup: skills/productivity/write-a-skill/SKILL.md
+  product-startup-idea: skills/productivity/grill-me/SKILL.md
+  mvp-planning: skills/productivity/grill-me/SKILL.md
+  technical-architecture: skills/productivity/grill-me/SKILL.md
+  cross-functional-team-simulation: skills/productivity/grill-me/SKILL.md
+  code-review: skills/engineering/review-changes/SKILL.md
+  pull-request-planning: skills/engineering/review-changes/SKILL.md
+  full-codebase-audit: skills/engineering/full-codebase-audit/SKILL.md
+  backend-ui-integration-audit: skills/engineering/full-codebase-audit/SKILL.md
+  performance-scalability-review: skills/engineering/full-codebase-audit/SKILL.md
+  observability-monitoring: skills/engineering/full-codebase-audit/SKILL.md
+  refactoring: skills/engineering/refactor-plan/SKILL.md
+  repo-restructuring: skills/engineering/refactor-plan/SKILL.md
+  legacy-migration: skills/engineering/refactor-plan/SKILL.md
+  framework-version-upgrade: skills/engineering/refactor-plan/SKILL.md
+  security-codebase-audit: skills/security/security-audit/SKILL.md
+  rbac-permission-design: skills/security/security-audit/SKILL.md
+  multi-tenancy-design: skills/security/security-audit/SKILL.md
+  compliance-audit: skills/security/security-audit/SKILL.md
 workflows:
   - id: product-startup-idea
     name: Product Startup Idea

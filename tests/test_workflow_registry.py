@@ -9,6 +9,15 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "skills/universal-ai-execution/references/workflow-registry.yaml"
 FIXTURE_PATH = ROOT / "tests/fixtures/required_workflow_ids.txt"
 EXPECTED_WORKFLOW_COUNT = 46
+REQUIRED_FOCUSED_SKILL_PATHS = {
+    "skills/setup-universal-ai-execution/SKILL.md",
+    "skills/productivity/write-a-skill/SKILL.md",
+    "skills/productivity/grill-me/SKILL.md",
+    "skills/engineering/review-changes/SKILL.md",
+    "skills/engineering/full-codebase-audit/SKILL.md",
+    "skills/engineering/refactor-plan/SKILL.md",
+    "skills/security/security-audit/SKILL.md",
+}
 
 REQUIRED_WORKFLOW_FIELDS = (
     "id",
@@ -94,3 +103,19 @@ def test_registry_workflows_have_required_structure() -> None:
             assert isinstance(workflow[field], list)
             assert workflow[field]
             assert all(isinstance(item, str) and item.strip() for item in workflow[field])
+
+
+def test_focused_skill_mappings_reference_existing_workflows_and_files() -> None:
+    registry = load_registry()
+    workflow_ids = {workflow["id"] for workflow in registry_workflows()}
+    mappings = registry["focused_skill_mappings"]
+
+    assert isinstance(mappings, dict)
+    assert mappings
+    assert REQUIRED_FOCUSED_SKILL_PATHS.issubset(set(mappings.values()))
+
+    for workflow_id, focused_path in mappings.items():
+        assert workflow_id in workflow_ids
+        assert isinstance(focused_path, str)
+        assert focused_path.strip()
+        assert (ROOT / focused_path).is_file(), focused_path

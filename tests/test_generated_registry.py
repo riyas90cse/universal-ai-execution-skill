@@ -44,6 +44,8 @@ def test_generated_registry_declares_source_and_router() -> None:
     assert "- Workflow count: 46" in content
     assert "- Source of truth: `skills/universal-ai-execution/references/workflow-registry.yaml`" in content
     assert "- Router: `skills/universal-ai-execution/SKILL.md`" in content
+    assert "## Focused Skill Mappings" in content
+    assert "| Workflow ID | Focused skill |" in content
 
 
 def test_generated_registry_contains_all_required_workflows() -> None:

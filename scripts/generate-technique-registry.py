@@ -111,7 +111,27 @@ def validate_registry(registry: Dict[str, Any]) -> List[Dict[str, Any]]:
     if duplicate_ids:
         raise ValueError(f"Duplicate workflow ids found: {', '.join(sorted(duplicate_ids))}.")
 
+    validate_focused_skill_mappings(registry, seen_ids)
+
     return workflows
+
+
+def validate_focused_skill_mappings(registry: Dict[str, Any], workflow_ids: Set[str]) -> Dict[str, str]:
+    mappings = registry.get("focused_skill_mappings", {})
+    if not isinstance(mappings, dict):
+        raise ValueError("Registry field 'focused_skill_mappings' must be a mapping when present.")
+
+    for workflow_id, skill_path in mappings.items():
+        if not isinstance(workflow_id, str) or not workflow_id.strip():
+            raise ValueError("Focused skill mapping keys must be non-empty workflow id strings.")
+        if workflow_id not in workflow_ids:
+            raise ValueError(f"Focused skill mapping references unknown workflow id: {workflow_id!r}.")
+        if not isinstance(skill_path, str) or not skill_path.strip():
+            raise ValueError(f"Focused skill mapping for {workflow_id!r} must be a non-empty path string.")
+        if not (ROOT / skill_path).is_file():
+            raise ValueError(f"Focused skill mapping path does not exist: {skill_path}")
+
+    return mappings
 
 
 def add_section(lines: List[str], title: str, items: List[str]) -> None:
@@ -131,15 +151,36 @@ def render_registry(registry: Dict[str, Any], workflows: List[Dict[str, Any]]) -
         f"- Workflow count: {registry['workflow_count']}",
         "- Source of truth: `skills/universal-ai-execution/references/workflow-registry.yaml`",
         "- Router: `skills/universal-ai-execution/SKILL.md`",
-        "",
-        "## Default Universal Workflow",
-        "",
-        "Use this sequence when no exact workflow matches:",
-        "",
-        " → ".join(registry["default_workflow_sequence"]),
-        "",
-        "## Workflows",
     ]
+
+    focused_skill_mappings = registry.get("focused_skill_mappings", {})
+    if focused_skill_mappings:
+        lines.extend(
+            [
+                "",
+                "## Focused Skill Mappings",
+                "",
+                "Optional accelerators keyed by workflow ID. The router still works without them.",
+                "",
+                "| Workflow ID | Focused skill |",
+                "| --- | --- |",
+            ]
+        )
+        for workflow_id, skill_path in focused_skill_mappings.items():
+            lines.append(f"| `{workflow_id}` | `{skill_path}` |")
+
+    lines.extend(
+        [
+            "",
+            "## Default Universal Workflow",
+            "",
+            "Use this sequence when no exact workflow matches:",
+            "",
+            " → ".join(registry["default_workflow_sequence"]),
+            "",
+            "## Workflows",
+        ]
+    )
 
     for workflow in workflows:
         lines.extend(
