@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import yaml
@@ -7,6 +8,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "skills/universal-ai-execution/references/workflow-registry.yaml"
+REGISTRY_SCHEMA_PATH = ROOT / "skills/universal-ai-execution/references/workflow-registry.schema.json"
 FIXTURE_PATH = ROOT / "tests/fixtures/required_workflow_ids.txt"
 EXPECTED_WORKFLOW_COUNT = 46
 REQUIRED_FOCUSED_SKILL_PATHS = {
@@ -119,3 +121,14 @@ def test_focused_skill_mappings_reference_existing_workflows_and_files() -> None
         assert isinstance(focused_path, str)
         assert focused_path.strip()
         assert (ROOT / focused_path).is_file(), focused_path
+
+
+def test_workflow_registry_schema_documents_current_registry_shape() -> None:
+    schema = json.loads(REGISTRY_SCHEMA_PATH.read_text(encoding="utf-8"))
+    properties = schema["properties"]
+    workflow_item = properties["workflows"]["items"]
+
+    assert REGISTRY_SCHEMA_PATH.is_file()
+    assert "focused_skill_mappings" in properties
+    assert set(REQUIRED_WORKFLOW_FIELDS).issubset(set(workflow_item["required"]))
+    assert properties["focused_skill_mappings"]["additionalProperties"]["pattern"] == "^skills/.+/SKILL\\.md$"

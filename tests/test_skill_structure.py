@@ -9,6 +9,7 @@ FIXTURE_PATH = ROOT / "tests/fixtures/required_workflow_ids.txt"
 
 REQUIRED_REFERENCE_FILES = (
     "workflow-registry.yaml",
+    "workflow-registry.schema.json",
     "technique-registry.md",
     "task-classification-rules.md",
     "output-contracts.md",
@@ -19,6 +20,8 @@ REQUIRED_REFERENCE_FILES = (
     "documentation-review-rules.md",
     "product-business-review-rules.md",
 )
+
+FOCUSED_SKILL_TEMPLATE = "skills/universal-ai-execution/templates/focused-skill-template.md"
 
 REQUIRED_FOCUSED_SKILL_FILES = (
     "skills/setup-universal-ai-execution/SKILL.md",
@@ -48,6 +51,11 @@ REQUIRED_ADAPTER_FILES = (
     "adapters/github-copilot/copilot-instructions.md",
     "adapters/generic-llm/universal-invocation-prompt.md",
     "adapters/symphony/WORKFLOW.md",
+)
+
+REQUIRED_FOCUSED_EXAMPLE_FILES = (
+    "examples/focused-code-review-example.md",
+    "examples/focused-security-audit-example.md",
 )
 
 ROUTER_FORBIDDEN_REGISTRY_MARKERS = (
@@ -89,9 +97,11 @@ def test_skill_has_yaml_front_matter_with_name_and_description() -> None:
 
 
 def test_required_root_files_exist() -> None:
+    assert (ROOT / ".github/workflows/ci.yml").is_file()
     assert (ROOT / "AGENTS.md").is_file()
     assert (ROOT / "WORKFLOW.md").is_file()
     assert (ROOT / "docs/focused-skills.md").is_file()
+    assert (ROOT / FOCUSED_SKILL_TEMPLATE).is_file()
 
 
 def test_required_reference_files_exist() -> None:
@@ -111,6 +121,14 @@ def test_required_focused_skill_files_exist() -> None:
         assert (ROOT / path).is_file(), path
 
 
+def test_required_focused_skill_examples_exist() -> None:
+    for path in REQUIRED_FOCUSED_EXAMPLE_FILES:
+        content = (ROOT / path).read_text(encoding="utf-8")
+
+        assert "## Routing" in content
+        assert "Optional focused skill:" in content
+
+
 def test_focused_skills_have_required_structure() -> None:
     for path in REQUIRED_FOCUSED_SKILL_FILES:
         content = (ROOT / path).read_text(encoding="utf-8")
@@ -127,6 +145,16 @@ def test_focused_skills_have_required_structure() -> None:
 
         for marker in ROUTER_FORBIDDEN_REGISTRY_MARKERS:
             assert marker not in content, f"{path} duplicates {marker}"
+
+
+def test_focused_skill_template_has_required_sections() -> None:
+    content = (ROOT / FOCUSED_SKILL_TEMPLATE).read_text(encoding="utf-8")
+
+    for section in REQUIRED_FOCUSED_SKILL_SECTIONS:
+        assert section in content
+
+    assert "existing-workflow-id" in content
+    assert "workflow-registry.yaml" in content
 
 
 def test_generic_invocation_prompt_exists() -> None:

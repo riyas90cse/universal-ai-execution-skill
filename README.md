@@ -91,6 +91,8 @@ Examples show realistic workflow selection, expected output structure, and good 
 - [MVP planning](examples/mvp-planning-example.md)
 - [Refactor plan](examples/refactor-plan-example.md)
 - [Documentation cleanup](examples/documentation-cleanup-example.md)
+- [Focused code review](examples/focused-code-review-example.md)
+- [Focused security audit](examples/focused-security-audit-example.md)
 - [RBAC design](examples/rbac-design-example.md)
 - [Testing strategy](examples/test-strategy-example.md)
 - [GTM strategy](examples/gtm-strategy-example.md)

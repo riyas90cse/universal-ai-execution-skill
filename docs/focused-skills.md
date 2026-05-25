@@ -31,6 +31,8 @@ Every focused skill should include:
 
 Focused skills may reference mapped workflow IDs, but they must not copy full workflow registry entries, workflow sequences, required outputs, validation rules, or common mistakes from the registry.
 
+Start from `skills/universal-ai-execution/templates/focused-skill-template.md` when adding a new focused skill.
+
 ## Routing Behavior
 
 1. Read the user request and repository instructions.
@@ -48,3 +50,8 @@ Focused skills may reference mapped workflow IDs, but they must not copy full wo
 4. Keep workflow definitions in the registry.
 5. Regenerate the readable registry if the generator renders the mapping.
 6. Run repository validation.
+
+## Examples
+
+- `examples/focused-code-review-example.md`
+- `examples/focused-security-audit-example.md`

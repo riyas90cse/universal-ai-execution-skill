@@ -8,6 +8,7 @@ not provide a Symphony runtime or native integration.
 
 - Router: `skills/universal-ai-execution/SKILL.md`
 - Workflow registry: `skills/universal-ai-execution/references/workflow-registry.yaml`
+- Optional focused skill mappings: `focused_skill_mappings` in the workflow registry
 - Task classification: `skills/universal-ai-execution/references/task-classification-rules.md`
 - Output contracts: `skills/universal-ai-execution/references/output-contracts.md`
 - Validation matrix: `skills/universal-ai-execution/references/validation-matrix.md`
@@ -22,11 +23,12 @@ Do not duplicate workflows inside this adapter.
 2. Read `skills/universal-ai-execution/SKILL.md`.
 3. Classify the task using the canonical classification rules.
 4. Select the workflow from the canonical registry.
-5. Inventory relevant files, docs, tests, configs, and source-of-truth material.
-6. Plan the smallest reviewable change.
-7. Implement only the current issue scope.
-8. Validate using the validation matrix and workflow-specific requirements.
-9. Report changed files, validation performed, known risks, and remaining
+5. Read a mapped focused skill when one exists and helps the selected workflow.
+6. Inventory relevant files, docs, tests, configs, and source-of-truth material.
+7. Plan the smallest reviewable change.
+8. Implement only the current issue scope.
+9. Validate using the validation matrix and workflow-specific requirements.
+10. Report changed files, validation performed, known risks, and remaining
    out-of-scope work.
 
 ## Small PR Discipline

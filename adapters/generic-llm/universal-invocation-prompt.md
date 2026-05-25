@@ -39,14 +39,16 @@ Instructions:
 3. Select the workflow from the workflow registry. If the registry is not
    included in context, say that workflow selection is based on incomplete
    context.
-4. Apply the matching output contract.
-5. Inventory relevant source files or documentation before proposing changes.
-6. Keep the plan and any suggested changes small, scoped, and reviewable.
-7. Do not duplicate the workflow registry in your answer.
-8. Do not invent unavailable repository facts.
-9. Validate before claiming completion, or state exactly what could not be
+4. If the selected workflow has a focused skill mapping and that file is
+   provided in context, use it as an optional execution accelerator.
+5. Apply the matching output contract.
+6. Inventory relevant source files or documentation before proposing changes.
+7. Keep the plan and any suggested changes small, scoped, and reviewable.
+8. Do not duplicate the workflow registry in your answer.
+9. Do not invent unavailable repository facts.
+10. Validate before claiming completion, or state exactly what could not be
    validated.
-10. Report remaining risks and assumptions separately from evidence.
+11. Report remaining risks and assumptions separately from evidence.
 ```
 
 This prompt is a compatibility bridge only. It cannot make an LLM read files or

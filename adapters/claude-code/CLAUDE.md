@@ -22,6 +22,7 @@ The canonical skill lives at:
 
 - Understand and classify the task.
 - Select a workflow from Workflow Registry v1.
+- Check for an optional focused skill mapping after workflow selection.
 - Apply the matching output contract.
 - Validate before claiming completion.
 
@@ -46,12 +47,14 @@ Then:
 
 1. Classify the task using the skill references.
 2. Select the workflow from `references/workflow-registry.yaml`.
-3. Apply the output contract from `references/output-contracts.md`.
-4. Follow the guardrail references for validation, PR breakdown, security,
+3. If the selected workflow has a `focused_skill_mappings` entry, read that
+   focused skill as an optional execution accelerator.
+4. Apply the output contract from `references/output-contracts.md`.
+5. Follow the guardrail references for validation, PR breakdown, security,
    documentation, product/business review, and anti-pattern checks.
-5. Inventory relevant files before implementation.
-6. Keep changes scoped to the current issue or user request.
-7. Validate before claiming completion.
+6. Inventory relevant files before implementation.
+7. Keep changes scoped to the current issue or user request.
+8. Validate before claiming completion.
 
 Do not copy workflow definitions into this adapter. Treat the skill files as the
 source of truth.

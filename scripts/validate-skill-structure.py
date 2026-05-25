@@ -25,11 +25,16 @@ FIXTURE_PATH = ROOT / "tests/fixtures/required_workflow_ids.txt"
 EXPECTED_WORKFLOW_COUNT = 46
 
 REQUIRED_PATHS = (
+    ".github/workflows/ci.yml",
     "AGENTS.md",
     "WORKFLOW.md",
     "docs/focused-skills.md",
+    "examples/focused-code-review-example.md",
+    "examples/focused-security-audit-example.md",
+    "skills/universal-ai-execution/templates/focused-skill-template.md",
     "skills/universal-ai-execution/SKILL.md",
     "skills/universal-ai-execution/references/workflow-registry.yaml",
+    "skills/universal-ai-execution/references/workflow-registry.schema.json",
     "skills/universal-ai-execution/references/technique-registry.md",
     "skills/universal-ai-execution/references/task-classification-rules.md",
     "skills/universal-ai-execution/references/output-contracts.md",
@@ -78,6 +83,17 @@ ROUTER_FORBIDDEN_REGISTRY_MARKERS = (
 )
 
 
+REGISTRY_DUPLICATION_SCAN_ROOTS = (
+    "adapters",
+    "examples",
+)
+
+REGISTRY_DUPLICATION_SCAN_FILES = (
+    "README.md",
+    "docs/focused-skills.md",
+)
+
+
 def required_workflow_ids() -> list[str]:
     return [
         line.strip()
@@ -94,6 +110,38 @@ def load_registry() -> dict[str, Any]:
         raise ValueError("workflow-registry.yaml must contain a mapping.")
 
     return registry
+
+
+def registry_duplicate_fragments(registry: dict[str, Any]) -> list[tuple[str, str, str]]:
+    fragments: list[tuple[str, str, str]] = []
+
+    for workflow in registry.get("workflows", []):
+        if not isinstance(workflow, dict):
+            continue
+
+        workflow_id = str(workflow.get("id", "<unknown>"))
+
+        sequence = workflow.get("workflow_sequence")
+        if isinstance(sequence, list) and all(isinstance(item, str) for item in sequence):
+            fragments.append((workflow_id, "workflow_sequence", " → ".join(sequence)))
+
+        for field in ("required_outputs", "validation_rules", "common_mistakes"):
+            items = workflow.get(field)
+            if isinstance(items, list) and len(items) > 1 and all(isinstance(item, str) for item in items):
+                fragments.append((workflow_id, field, "\n".join(f"- {item}" for item in items)))
+
+    return fragments
+
+
+def duplication_scan_paths() -> list[Path]:
+    paths = [ROOT / path for path in REGISTRY_DUPLICATION_SCAN_FILES]
+    paths.extend(ROOT / path for path in REQUIRED_FOCUSED_SKILL_PATHS)
+    paths.append(ROOT / "skills/universal-ai-execution/templates/focused-skill-template.md")
+
+    for root in REGISTRY_DUPLICATION_SCAN_ROOTS:
+        paths.extend((ROOT / root).rglob("*.md"))
+
+    return sorted({path for path in paths if path.is_file()})
 
 
 def validate_skill_front_matter(content: str, path: str, errors: list[str]) -> None:
@@ -155,6 +203,15 @@ def validate() -> list[str]:
         missing = sorted(expected_ids - set(actual_ids))
         extra = sorted(set(actual_ids) - expected_ids)
         errors.append(f"workflow IDs must match fixture. Missing={missing}; extra={extra}")
+
+    for path in duplication_scan_paths():
+        content = path.read_text(encoding="utf-8")
+        relative_path = path.relative_to(ROOT).as_posix()
+        for workflow_id, field, fragment in registry_duplicate_fragments(registry):
+            if fragment and fragment in content:
+                errors.append(
+                    f"{relative_path} must not duplicate registry {field} content for workflow {workflow_id}."
+                )
 
     focused_skill_mappings = registry.get("focused_skill_mappings")
     if not isinstance(focused_skill_mappings, dict) or not focused_skill_mappings:
