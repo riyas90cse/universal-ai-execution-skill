@@ -29,6 +29,7 @@ REQUIRED_PATHS = (
     "AGENTS.md",
     "WORKFLOW.md",
     "docs/focused-skills.md",
+    "examples/requirements-driven-prompting-example.md",
     "examples/focused-code-review-example.md",
     "examples/focused-security-audit-example.md",
     "skills/universal-ai-execution/templates/focused-skill-template.md",

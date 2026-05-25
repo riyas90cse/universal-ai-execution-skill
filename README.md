@@ -85,6 +85,7 @@ Use `adapters/symphony/WORKFLOW.md` as issue-driven orchestration guidance. It i
 
 Examples show realistic workflow selection, expected output structure, and good versus bad prompting behavior.
 
+- [Requirements-driven prompting](examples/requirements-driven-prompting-example.md)
 - [Codebase audit](examples/codebase-audit-example.md)
 - [Backend/UI integration audit](examples/backend-ui-integration-example.md)
 - [Security audit](examples/security-audit-example.md)

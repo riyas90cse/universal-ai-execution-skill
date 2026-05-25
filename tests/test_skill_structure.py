@@ -58,6 +58,8 @@ REQUIRED_FOCUSED_EXAMPLE_FILES = (
     "examples/focused-security-audit-example.md",
 )
 
+REQUIREMENTS_PROMPTING_EXAMPLE = "examples/requirements-driven-prompting-example.md"
+
 ROUTER_FORBIDDEN_REGISTRY_MARKERS = (
     "workflow_count:",
     "workflows:",
@@ -127,6 +129,15 @@ def test_required_focused_skill_examples_exist() -> None:
 
         assert "## Routing" in content
         assert "Optional focused skill:" in content
+
+
+def test_requirements_prompting_example_exists() -> None:
+    content = (ROOT / REQUIREMENTS_PROMPTING_EXAMPLE).read_text(encoding="utf-8")
+
+    assert "Universal AI Execution Skill" in content
+    assert "## Prompt Template" in content
+    assert "Expected mode:" in content
+    assert "focused skill" in content
 
 
 def test_focused_skills_have_required_structure() -> None:
