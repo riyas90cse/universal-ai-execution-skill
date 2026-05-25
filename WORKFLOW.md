@@ -20,6 +20,8 @@ Work in this repository is issue-driven and release-oriented.
 - Adapter files should translate usage format only.
 - Examples should demonstrate real workflow IDs only.
 - Tests should validate structure and registry integrity, not simulate AI behavior.
+- Templates should provide reusable output shapes without redefining workflows.
+- Skill-local scripts should be narrow migration or consistency helpers and should not replace root-level validation.
 
 ## Release Readiness
 

@@ -26,6 +26,7 @@ Use `python3` instead of `python` if the local environment does not provide a `p
 - [ ] Design principles are current.
 - [ ] Roadmap is current.
 - [ ] Versioning policy is current.
+- [ ] Template and skill-local script README boundaries are current.
 
 ## Release Notes
 

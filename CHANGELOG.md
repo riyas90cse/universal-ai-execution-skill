@@ -6,6 +6,7 @@ This project follows semantic versioning. See [docs/versioning.md](docs/versioni
 
 ## Unreleased
 
+- Clarified template and skill-local script directory boundaries, including migration and consistency-check guidance.
 - Added Claude Code adapter instructions.
 - Polished README, contribution, workflow, security, and agent instructions for public release readiness.
 - Added release documentation for design principles, roadmap, release checklist, and versioning.

@@ -49,3 +49,9 @@ When docs and code disagree, mark the docs stale unless the issue explicitly ask
 Documentation should be concise, linked, and grounded in current repository state.
 
 Docs can describe direction, but they should not imply future work is already implemented.
+
+## Templates and Scripts as Support Artifacts
+
+Templates and skill-local scripts are support artifacts. They should improve consistency, migration safety, or maintenance checks without changing the router, registry, or workflow behavior.
+
+Templates should provide reusable shapes. Scripts should provide deterministic checks or issue-scoped migration helpers. Both should point back to canonical source-of-truth files.

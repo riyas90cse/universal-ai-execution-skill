@@ -48,5 +48,8 @@ This roadmap is directional. Issue scope remains the source of truth for actual 
 - Workflow scoring.
 - More adapters.
 - Real-world case studies.
+- Skill-local migration helpers.
+- Additional consistency checks.
+- Reusable templates for common output contracts.
 
 Future ideas are not committed scope until tracked by issues.

@@ -50,6 +50,16 @@ Pull requests should explain:
 
 Keep PRs focused on one review purpose. Do not mix workflow changes, adapter changes, examples, tests, and documentation cleanup unless the issue explicitly asks for that combination.
 
+## Templates and Skill-Local Scripts
+
+`skills/universal-ai-execution/templates/` and `skills/universal-ai-execution/scripts/` are reserved for future issue-driven additions.
+
+- Templates should be concise Markdown artifacts that reference canonical files without becoming hidden workflows.
+- Skill-local scripts should be narrow helpers for this skill directory only.
+- Migration helpers must document before/after expectations, validation, and rollback or manual recovery notes.
+- Consistency checks should report drift instead of silently rewriting canonical files.
+- New scripts need tests or clear validation notes.
+
 ## Workflow Registry Changes
 
 Workflow Registry v1 is the source of truth for workflow IDs and workflow content. Registry changes should be handled carefully:
